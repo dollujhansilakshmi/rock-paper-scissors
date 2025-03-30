@@ -1,0 +1,76 @@
+import random
+
+def get_computer_choice():
+    return random.choice(["rock", "paper", "scissors"])
+
+def determine_winner(player, computer):
+    if player == computer:
+        return "It's a tie!"
+    elif (player == "rock" and computer == "scissors") or \
+         (player == "scissors" and computer == "paper") or \
+         (player == "paper" and computer == "rock"):
+        return "You win!"
+    else:
+        return "You lose!"
+
+def play_game():
+    print("Rock, Paper, Scissors Game!")
+    while True:
+        player_choice = input("Enter rock, paper, or scissors (or 'quit' to exit): ").lower()
+        if player_choice == "quit":
+            print("Thanks for playing!")
+            break
+        elif player_choice not in ["rock", "paper", "scissors"]:
+            print("Invalid choice, try again.")
+            continue
+
+        computer_choice = get_computer_choice()
+        print(f"Computer chose: {computer_choice}")
+        print(determine_winner(player_choice, computer_choice))
+        print()
+
+play_game()
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        button { font-size: 20px; margin: 10px; padding: 10px; cursor: pointer; }
+        #result { font-size: 24px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <button onclick="playGame('rock')">🪨 Rock</button>
+    <button onclick="playGame('paper')">📄 Paper</button>
+    <button onclick="playGame('scissors')">✂️ Scissors</button>
+    <p id="result"></p>
+
+    <script>
+        function playGame(playerChoice) {
+            const choices = ["rock", "paper", "scissors"];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let result = "";
+
+            if (playerChoice === computerChoice) {
+                result = "It's a tie!";
+            } else if (
+                (playerChoice === "rock" && computerChoice === "scissors") ||
+                (playerChoice === "scissors" && computerChoice === "paper") ||
+                (playerChoice === "paper" && computerChoice === "rock")
+            ) {
+                result = "You win!";
+            } else {
+                result = "You lose!";
+            }
+
+            document.getElementById("result").innerHTML = 
+                `You chose: ${playerChoice} <br> Computer chose: ${computerChoice} <br> <b>${result}</b>`;
+        }
+    </script>
+</body>
+</html>
+
